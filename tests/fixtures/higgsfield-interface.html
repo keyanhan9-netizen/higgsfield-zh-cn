@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>Original localization test fixture</title></head>
+  <body>
+    <header>
+      <nav aria-label="Primary">
+        <a class="hfnav-item" href="/ai/image" id="nav-image">Image</a>
+        <a class="hfnav-item" href="/ai/video" id="nav-video">  Video  </a>
+        <a class="hfnav-item" href="/pricing" id="nav-pricing" title="Pricing" aria-label="Pricing">Pricing</a>
+        <a class="hfnav-item" href="/@example-creator" id="profile-link">Image</a>
+      </nav>
+      <button class="hfnav-action" id="nav-create" title="Create" aria-label="Create">Create</button>
+    </header>
+    <main>
+      <fieldset id="generation-controls">
+        <legend id="quality">Quality</legend>
+        <label id="duration">Duration</label>
+        <button id="generate" title="Generate" aria-label="Generate"><span>Generate</span><svg aria-hidden="true" viewBox="0 0 10 10"><path d="M1 1 L9 9"></path></svg></button>
+        <button id="cancel">Cancel</button>
+        <button id="partial">Generate an image</button>
+        <button id="lowercase">generate</button>
+        <button id="generic-file-name">High</button>
+        <button class="bg-primary" id="production-generate">
+          <div class="flex flex-col">
+            <div id="production-generate-text" title="Generate" aria-label="Generate">Generate<span class="uploaded-file-name" id="marked-file-name">High</span><span id="unmarked-file-name">High</span></div>
+            <div id="production-credit">12 credits</div>
+          </div>
+        </button>
+        <button class="text-font-brand text-caption-l" id="production-auto">
+          <div class="flex flex-col">
+            <span class="text-caption-l"><div class="flex" id="production-auto-text">Auto<span class="uploaded-file-name" id="auto-marked-file-name">High</span><span id="auto-unmarked-file-name">High</span></div></span>
+          </div>
+        </button>
+        <input id="prompt" value="Generate" placeholder="Generate" title="Generate" aria-label="Generate">
+        <textarea id="prompt-textarea" placeholder="Generate">Generate</textarea>
+        <select id="selection" title="Generate"><option>Generate</option></select>
+        <div contenteditable="true" id="editable"><button>Generate</button><span>Image</span></div>
+        <div contenteditable="" id="empty-editable"><button>Generate</button></div>
+        <div contenteditable="plaintext-only" id="plaintext-editable"><button>Generate</button></div>
+        <div contenteditable="false" id="explicitly-not-editable"><button>Generate</button></div>
+        <button translate="no" id="translate-no">Generate</button>
+        <button class="notranslate" id="notranslate">Generate</button>
+        <div data-hf-zh-ignore><button id="ignore">Generate</button></div>
+        <div data-user-content><button id="user-content">Generate</button></div>
+        <div data-feed-item><button id="feed-item">Generate</button></div>
+        <div data-testid="prompt-editor"><button id="prompt-testid">Generate</button></div>
+        <div data-testid="user-content-card"><button id="content-testid">Generate</button></div>
+        <div data-testid="code-editor"><button id="code-testid">Generate</button></div>
+        <div class="ProseMirror"><button id="prosemirror">Generate</button></div>
+        <div class="tiptap"><button id="tiptap">Generate</button></div>
+        <div class="monaco-editor"><button id="monaco">Generate</button></div>
+        <a href="/@example-creator"><button id="work-link">Generate</button></a>
+        <pre id="pre"><button>Generate</button></pre>
+        <code id="code"><button>Generate</button></code>
+        <script id="script" type="text/plain">Generate</script>
+        <style id="style">/* Generate */</style>
+      </fieldset>
+      <p id="user-prose">Generate</p>
+      <article id="invented-work" data-user-content>
+        <h1>Image</h1><p>An invented creator wrote: Generate, Cancel, Quality.</p>
+      </article>
+      <section id="protected-target" data-user-content></section>
+    </main>
+    <footer><a href="/pricing" id="footer-pricing">Pricing</a><a href="/privacy-policy" id="footer-privacy">Privacy</a></footer>
+  </body>
+</html>
