@@ -38,6 +38,10 @@ for (const rule of rules) {
   assert.equal(typeof rule.selector, 'string');
   assert(rule.selector.trim());
   if (rule.paths) for (const prefix of rule.paths) assert(/^\/[a-z0-9/-]+$/.test(prefix));
+  if (rule.attributes) assert(rule.attributes.every(name => ['title', 'aria-label'].includes(name)));
+  if (rule.text !== undefined) assert.equal(typeof rule.text, 'boolean');
+  if (rule.linkedFrom) assert(rule.ownText === true && rule.paths?.length);
+  if (rule.scopeHeading) assert(rule.linkedFrom && rule.scopeHeading.values.length > 0);
   for (const [original, translated] of Object.entries(rule.entries)) {
     assert(original.trim() === original && original.length > 0 && original.length <= 120);
     assert.equal(typeof translated, 'string');

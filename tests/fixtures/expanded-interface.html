@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><title>Original expanded interface test fixture</title></head>
+  <body>
+    <!-- Original, invented fixture. No website HTML, media, accounts or user data are copied. -->
+    <header>
+      <nav><a class="hfnav-item" href="/ai/image" id="expanded-nav-image">Image</a></nav>
+      <button id="header-search" aria-label="Search Higgsfield"></button>
+      <div id="fixture-content-Create Image Tab">
+        <p id="menu-features">Features</p>
+        <p id="menu-create-image">Create Image</p>
+        <p id="menu-description">Generate AI images</p>
+        <p id="menu-model">GPT Image 2</p>
+        <p id="menu-number">4096 × 4096</p>
+        <p id="menu-protected" data-user-content>Create Image</p>
+        <textarea id="menu-input">Create Image</textarea>
+      </div>
+      <div id="unrelated-header-panel"><p id="unrelated-menu-label">Features</p></div>
+    </header>
+    <main>
+      <form id="image-form">
+        <fieldset>
+          <button id="image-trigger" class="text-font-brand text-caption-l" aria-controls="image-popup-a" aria-haspopup="listbox">
+            <div class="flex flex-col"><span class="text-caption-l"><div class="flex items-center" id="image-setting-label">High<span id="image-nested-file">High</span></div></span></div>
+          </button>
+          <button id="image-decrement" aria-label="Decrement" title="Decrement">Decrement</button>
+          <button id="image-increment" aria-label="Increment"></button>
+          <button id="image-references" aria-label="References" title="References">References</button>
+          <button id="image-upload-user-name" aria-label="Remove media" title="High">High</button>
+          <button id="image-generic-button">High</button>
+          <label id="image-generic-label">High</label>
+          <span id="image-file-name" class="uploaded-file-name">High</span>
+          <input id="image-prompt" value="Generate" placeholder="Generate" title="High" aria-label="Prompt">
+          <textarea id="image-prompt-textarea">High</textarea>
+        </fieldset>
+      </form>
+      <div id="video-create-layout">
+        <div>
+          <nav>
+            <div class="interactive-tap text-caption-l" id="video-tab-create">Create Video</div>
+            <div class="interactive-tap text-caption-l" id="video-tab-edit">Edit Video</div>
+            <div class="interactive-tap text-caption-l" id="video-tab-motion">Motion Control</div>
+          </nav>
+          <div class="grid-cols-2 mb-4"><button role="radio" id="video-radio-references">References</button><button role="radio" id="video-radio-extend">Extend Video</button></div>
+          <button class="bg-primary text-btn-accent-text" id="video-primary-generate">Generate<span id="video-primary-file-name">High</span></button>
+          <section data-user-content id="video-actions-user-content">
+            <nav><div class="interactive-tap text-caption-l" id="video-user-tab">Create Video</div></nav>
+            <div class="grid-cols-2 mb-4"><button role="radio" id="video-user-radio">References</button></div>
+            <button class="bg-primary text-btn-accent-text" id="video-user-generate">Generate<span>High</span></button>
+          </section>
+          <fieldset>
+            <button id="video-trigger" aria-controls="video-popup" aria-haspopup="dialog" aria-label="Bitrate">Bitrate<span class="text-sm-medium" id="video-mode">Model</span><span class="text-caption-l" id="video-setting-high">High</span><span id="video-unmarked-file">High</span></button>
+            <button><span class="text-q-caption-sm-medium" id="video-resolution">Resolution</span></button>
+            <button><p class="text-xs-medium" id="video-reference-help">Image, Video or Audio</p></button>
+            <label><span class="text-caption-m" id="video-prompt-label">Prompt</span></label>
+            <label><span class="text-caption-m" id="video-duration-label">Duration</span></label>
+            <button><div id="video-generic-div">High</div><span id="video-generic-span">High</span></button>
+            <input id="video-prompt" value="Generate" placeholder="Prompt" title="High">
+            <textarea id="video-prompt-textarea">Create Video</textarea>
+          </fieldset>
+        </div>
+        <div data-user-content><span id="video-work-caption" class="text-q-caption-sm-medium">Resolution</span></div>
+        <span class="q-tabs-tab-label" id="video-history">History</span>
+      </div>
+      <aside>
+        <div><div><button class="interactive-tap" id="audio-mode">Voice Change</button></div></div>
+        <form id="audio-form">
+          <div class="sticky bottom-0"><button id="audio-generate"><span class="text-lg font-semibold" id="audio-generate-label">Generate</span><span id="audio-unmarked-file">High</span></button></div>
+          <button><span class="text-xs-medium text-qc-text-secondary" id="audio-advanced">Advanced settings</span></button>
+          <button><span class="min-w-0 flex-1 truncate text-left" id="audio-voice-details">Voice details</span></button>
+          <span class="pointer-events-none text-xxs-medium" id="audio-optional">Optional</span>
+          <span class="text-sm-medium text-font-secondary" id="audio-script-label">Script</span>
+          <label class="text-sm-medium text-font-secondary" id="audio-batch-label">Batch size</label>
+          <label class="text-sm-medium text-font-secondary" id="audio-speed-label">Speed</label>
+          <button id="audio-decrease" aria-label="Decrease batch size" title="Decrease batch size">Decrease batch size</button>
+          <button id="audio-upload-user-name" aria-label="Remove media" title="Generate">Generate</button>
+          <button id="audio-model"><span class="truncate text-xs font-medium leading-4 text-font-secondary">Example Voice Model</span></button>
+          <button><span class="text-sm-medium tracking-normal" id="audio-user-voice-name">Happy</span></button>
+          <span class="text-sm-medium text-font-primary" id="audio-user-unmarked-text">Generate</span>
+          <span class="text-xs-medium text-font-secondary" id="audio-number">44.1 kHz</span>
+          <span class="text-sm-medium text-font-secondary uploaded-file-name" id="audio-file-name">Script</span>
+          <div data-user-content><span class="text-sm-medium text-font-secondary" id="audio-work">Script</span></div>
+          <input id="audio-prompt" value="Generate" placeholder="Script" title="High">
+          <textarea id="audio-script">Neutral</textarea>
+          <div contenteditable="true" id="audio-editor"><span class="text-sm-medium text-font-secondary">Script</span></div>
+        </form>
+      </aside>
+      <div id="audio-feed-view-controls-bar"><button><span class="px-1" id="audio-history">History</span></button></div>
+      <section id="effects-fixture">
+        <button class="q-dropdown-trigger"><span class="flex flex-col"><span class="text-q-caption-sm-medium" id="effects-resolution">Resolution</span><span id="effects-number">1080p</span></span></button>
+        <button class="q-dropdown-trigger"><span class="flex flex-col"><span class="text-q-caption-sm-medium" id="effects-ratio">Aspect Ratio</span><span id="effects-ratio-number">16:9</span></span></button>
+        <button class="q-button-marketing-primary" id="effects-generate">Generate<span id="effects-unmarked-file">High</span></button>
+      </section>
+      <section id="layers-empty-fixture"><button class="q-button-marketing-primary"><span class="q-button-label-frame" id="layers-upload-label">Upload Media<span id="layers-file-name">High</span></span></button></section>
+      <section id="influencer-fixture">
+        <div class="ai-influencer-builder-mode-tabs"><button role="tab"><span class="q-tabs-tab-content" id="influencer-create-label">Create Influencer</span></button><button role="tab"><span class="q-tabs-tab-content" id="influencer-motion-label">Motion</span></button></div>
+        <button class="q-accordion-trigger"><span class="q-accordion-trigger-label" id="influencer-gender">Gender<span id="influencer-option-count"> · 5</span><span id="influencer-file-name">High</span></span></button>
+        <button class="q-accordion-trigger"><span class="q-accordion-trigger-label" id="influencer-hair">Hair Color<span> · 13</span></span></button>
+        <div data-user-content><button class="q-accordion-trigger"><span class="q-accordion-trigger-label" id="influencer-work-title">Gender</span></button></div>
+        <textarea id="influencer-prompt">Create Influencer</textarea>
+        <button class="q-button-marketing-primary"><span class="q-button-label-frame" id="influencer-recreate">Recreate</span></button>
+      </section>
+      <section class="group/sidebar" id="cinema-sidebar">
+        <button class="group/top-action"><span class="truncate text-sm-medium" id="cinema-home">Home</span></button>
+        <button class="group/top-action"><span class="truncate text-sm-medium" id="cinema-generations">My generations</span></button>
+        <p class="text-q-caption-sm-medium text-q-text-secondary" id="cinema-project-heading">Projects</p>
+        <a href="/projects/invented-fixture"><p class="text-q-caption-sm-medium text-q-text-secondary" id="cinema-project-title">Projects</p></a>
+        <input id="cinema-search" value="Home" placeholder="Search projects">
+      </section>
+    </main>
+    <!-- Portals deliberately sit outside main. Only a verified trigger may scope them. -->
+    <div id="image-popup-a" role="listbox">
+      <span class="text-caption-l" id="popup-quality-title">Select quality</span>
+      <span class="text-caption-l" id="popup-high" title="High" aria-label="High">High<span id="popup-nested-file">High</span></span>
+      <span class="text-caption-s" id="popup-quality-description">Best visual fidelity</span>
+      <div class="flex items-center gap-1" id="popup-auto">Auto</div>
+      <span class="text-caption-l" id="popup-model">GPT Image 2</span>
+      <span class="text-caption-s" id="popup-number">4096 × 4096</span>
+      <span class="text-caption-l uploaded-file-name" id="popup-marked-file">High</span>
+      <span class="text-caption-l" data-file-name id="popup-data-file">Generate</span>
+      <div data-user-content><span class="text-caption-l" id="popup-user-content">High</span></div>
+      <div contenteditable="true"><span class="text-caption-l" id="popup-editor">High</span></div>
+      <code><span class="text-caption-l" id="popup-code">High</span></code>
+      <input id="popup-input" value="High" title="High" aria-label="High" placeholder="Generate">
+      <textarea id="popup-textarea">Generate</textarea>
+    </div>
+    <div id="image-popup-b" role="listbox">
+      <span class="text-caption-l" id="popup-b-quality-title">Select quality</span>
+      <span class="text-caption-l" id="popup-b-high" title="High" aria-label="High">High</span>
+    </div>
+    <div id="unrelated-settings" role="dialog"><span class="text-caption-l" id="unrelated-high">High</span><span class="text-caption-l" id="unrelated-quality">Select quality</span></div>
+    <div id="invalid-role-popup" role="region"><span class="text-caption-l" id="invalid-role-high">High</span></div>
+    <div id="video-popup" role="dialog">
+      <span class="text-sm-medium" id="video-popup-bitrate">Bitrate</span>
+      <span class="truncate text-sm-medium" id="video-popup-high">High</span>
+      <span class="text-caption-m" id="video-popup-standard">Standard</span>
+      <span class="text-caption-m" id="video-popup-description">More compression · smaller size</span>
+      <button><span id="video-popup-cancel" title="Cancel">Cancel</span><span id="video-popup-model">Example Video Model</span><span id="video-popup-number">720p</span></button>
+      <label id="video-popup-duration">Duration</label>
+      <div data-user-content><label id="video-popup-work">Duration</label></div>
+    </div>
+    <footer><a href="/privacy-policy" id="expanded-privacy">Privacy</a></footer>
+  </body>
+</html>

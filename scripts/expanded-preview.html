@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Higgsfield 汉化 v0.2 · 原创夹具验证</title>
+<style>
+body{font:16px/1.6 system-ui,sans-serif;background:#f3f7f5;color:#17372a;max-width:1050px;margin:32px auto;padding:0 24px}h1{font-size:30px;margin:8px 0}p,small{color:#547366}.controls{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}button,select{font:inherit;background:white;border:1px solid #9ab8ac;border-radius:8px;padding:7px 12px;color:#234f3e;cursor:pointer}#status{background:#dcebe4;padding:12px 16px;border-radius:10px}iframe{width:100%;height:700px;background:white;border:1px solid #bdd2c8;border-radius:12px;margin-top:18px}
+</style>
+<script src="../extension/dictionary.js" defer></script><script src="../extension/engine.js" defer></script><script src="expanded-preview.js" defer></script>
+</head>
+<body>
+<small>本地验证 · 原创合成数据 · v0.2.0</small>
+<h1>设置与菜单汉化，输入和型号保留原文</h1>
+<p>使用正式词典与引擎验证。此页面是原创夹具，不代表真实网站已安装或全站实测。</p>
+<div class="controls"><button id="chinese">简体中文</button><button id="english">English</button><button id="insert">动态新增设置说明</button><button id="refresh">重复执行</button></div>
+<div class="controls"><label>模拟页面 <select id="route"><option value="/ai/image">图片与质量菜单</option><option value="/ai/video">视频与码率菜单</option><option value="/audio">音频表单</option><option value="/generate">电影工作室侧栏</option><option value="/effects/use">特效参数</option><option value="/layers">编辑页空状态</option><option value="/ai-influencer-studio">AI 网红参数</option><option value="/community">未覆盖路由</option></select></label></div>
+<div id="status" role="status">正在准备原创夹具…</div>
+<iframe id="fixture" title="扩展页面原创测试夹具" src="../tests/fixtures/expanded-interface.html"></iframe>
+</body></html>

@@ -20,7 +20,7 @@
   const OBSERVED = [
     ...ATTRIBUTES, 'class', 'role', 'href', 'contenteditable', 'translate',
     'data-hf-zh-ignore', 'data-user-content', 'data-feed-item', 'data-feed-hover-selection',
-    'data-prompt', 'data-testid', 'data-file-name', 'data-filename'
+    'data-prompt', 'data-testid', 'data-file-name', 'data-filename', 'aria-controls', 'aria-haspopup', 'id'
   ];
 
   function isSupportedLocation(location) {
@@ -38,6 +38,7 @@
     let routeTimer;
     let pathname = getPathname();
     let activeRules = [];
+    let linkedScopes = new Map();
 
     function blocked(element) {
       return !element || Boolean(element.closest(PROTECTED));
@@ -45,7 +46,10 @@
 
     function ruleFor(element) {
       if (blocked(element)) return undefined;
-      return activeRules.find(rule => rule.ownText ? element.matches(rule.selector) : element.closest(rule.selector));
+      return activeRules.find(rule => {
+        if (rule.linkedFrom && !linkedScopes.get(rule)?.some(scope => scope.contains(element))) return false;
+        return rule.ownText ? element.matches(rule.selector) : element.closest(rule.selector);
+      });
     }
 
     function translatedValue(value, rule) {
@@ -68,13 +72,13 @@
     function reconcile(restoreAll = false) {
       for (const [node, record] of texts) {
         const rule = ruleFor(node.parentElement);
-        if (restoreAll || !node.isConnected || !rule || translatedValue(record.original, rule) !== record.translated) restoreText(node, record);
+        if (restoreAll || !node.isConnected || !rule || rule.text === false || translatedValue(record.original, rule) !== record.translated) restoreText(node, record);
         else if (node.data !== record.translated) texts.delete(node);
       }
       for (const [element, map] of attributes) {
         for (const [name, record] of map) {
           const rule = ruleFor(element);
-          if (restoreAll || !element.isConnected || !rule || translatedValue(record.original, rule) !== record.translated) restoreAttribute(element, name, record, map);
+          if (restoreAll || !element.isConnected || !rule || !(rule.attributes || ATTRIBUTES).includes(name) || translatedValue(record.original, rule) !== record.translated) restoreAttribute(element, name, record, map);
           else if (element.getAttribute(name) !== record.translated) map.delete(name);
         }
         if (!map.size) attributes.delete(element);
@@ -85,7 +89,8 @@
       if (blocked(element)) return;
       const rule = ruleFor(element);
       if (!rule) return;
-      for (const name of ATTRIBUTES) {
+      for (const name of rule.attributes || ATTRIBUTES) {
+        if (!ATTRIBUTES.includes(name)) continue;
         const current = element.getAttribute(name);
         if (current === null || attributes.get(element)?.has(name)) continue;
         const translated = translatedValue(current, rule);
@@ -95,6 +100,7 @@
           element.setAttribute(name, translated);
         }
       }
+      if (rule.text === false) return;
       for (const child of element.childNodes) {
         if (child.nodeType === 1 && !rule.ownText) translateElement(child, seen);
         else if (child.nodeType === 3 && !seen.has(child)) {
@@ -125,6 +131,16 @@
 
     function schedule(mutations) {
       invalidateExternalWrites(mutations);
+      // Once removal has been delivered, this document observer cannot see
+      // later writes to detached nodes. Release originals before that gap.
+      if (mutations.some(mutation => mutation.type === 'childList' && mutation.removedNodes.length)) {
+        for (const [node, record] of texts) if (!node.isConnected) restoreText(node, record);
+        for (const [element, map] of attributes) {
+          if (element.isConnected) continue;
+          for (const [name, record] of map) restoreAttribute(element, name, record, map);
+          attributes.delete(element);
+        }
+      }
       if (!running || pending !== undefined) return;
       pending = window.setTimeout(() => { pending = undefined; refresh(); }, 40);
     }
@@ -137,11 +153,35 @@
       // A pathname change can remove a control from a previously valid UI scope.
       pathname = getPathname();
       activeRules = rules.filter(rule => !rule.paths || rule.paths.some(prefix => pathname === prefix || pathname.startsWith(prefix + '/')));
+      // Portals are reached only through known UI controls. Their IDs are never
+      // assumed, and unrelated dialogs/menu items remain outside the rule.
+      linkedScopes = new Map();
+      for (const rule of activeRules) {
+        if (!rule.linkedFrom) continue;
+        const scopes = [];
+        for (const control of document.querySelectorAll(rule.linkedFrom)) {
+          if (blocked(control)) continue;
+          for (const id of (control.getAttribute('aria-controls') || '').split(/\s+/).filter(Boolean)) {
+            const scope = document.getElementById(id);
+            if (!scope || !scope.matches('[role="dialog"], [role="listbox"], [role="menu"]')) continue;
+            if (rule.scopeHeading && !Array.from(scope.querySelectorAll(rule.scopeHeading.selector)).some(heading => {
+              if (blocked(heading)) return false;
+              const text = Array.from(heading.childNodes).filter(node => node.nodeType === 3).map(node => node.data).join('').trim();
+              return rule.scopeHeading.values.includes(text);
+            })) continue;
+            scopes.push(scope);
+          }
+        }
+        linkedScopes.set(rule, scopes);
+      }
       reconcile(!enabled);
       if (enabled) {
         const seen = new Set();
         for (const rule of activeRules) {
-          for (const element of document.querySelectorAll(rule.selector)) translateElement(element, seen);
+          const scopes = rule.linkedFrom ? linkedScopes.get(rule) : [document];
+          for (const scope of scopes) {
+            for (const element of scope.querySelectorAll(rule.selector)) translateElement(element, seen);
+          }
         }
       }
       if (running) observer.observe(document.documentElement, {

@@ -1,0 +1,3 @@
+Higgsfield 非官方 Chrome 汉化扩展开源啦 🇨🇳
+导航菜单和多页常用控件中文化，中英切换，本地词典、无遥测，提示词和作品保持原文。MIT 免费开源；尚未覆盖全站，欢迎补词！
+下载与安装：https://github.com/keyanhan9-netizen/higgsfield-zh-cn

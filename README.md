@@ -2,7 +2,7 @@
 
 为 [Higgsfield](https://higgsfield.ai/) 的部分界面提供简体中文翻译。独立、非官方项目，与 Higgsfield 及其运营方无关联，未获得其认可或背书。Higgsfield 名称及相关商标归其权利人所有。
 
-首版版本为 **0.1.0**，采用 Chrome Manifest V3。使用扩展内置词典，在页面中翻译明确匹配的导航和控件文字，包括适用控件的 `title` 和 `aria-label`；不翻译用户提示词、作品或代码。品牌与模型名称保留原文。
+当前版本为 **0.2.0**，采用 Chrome Manifest V3。使用扩展内置词典，在页面中翻译明确匹配的导航和控件文字，包括适用控件的 `title` 和 `aria-label`；不翻译用户提示词、作品或代码。品牌与模型名称保留原文。
 
 ## 功能与范围
 
@@ -12,13 +12,13 @@
 - 仅作用于 `https://higgsfield.ai/*` 和 `https://www.higgsfield.ai/*`，不覆盖其他子域名或网站。
 - 只使用本地精确词典，不调用外部翻译服务，不包含遥测。
 
-这是保守的首版：仅在限定选择器和路由内替换精确匹配的界面文字，未收录的内容会保留原文。它不是全站汉化，也不是网页通用翻译器。观察与测试的具体范围见 [覆盖说明](docs/coverage.md)。
+0.2.0 扩展了图片／视频／音频导航菜单、图片质量菜单、视频主要操作与码率菜单、音频部分固定控件、Cinema Studio 侧栏、特效参数、编辑页空状态及 AI 网红参数标题。仅在限定选择器和路由内替换精确文案，未收录的内容会保留原文。目前仍未达到全站完整汉化；具体已验证和剩余界面见 [覆盖说明](docs/coverage.md)。
 
 ## 安装
 
 源码公开不代表已经上架 Chrome 应用商店。本项目当前按“加载已解压的扩展程序”方式安装。
 
-1. 获取本仓库源码，或获取发布时提供的 `higgsfield-zh-cn-v0.1.0.zip`。
+1. 获取本仓库源码，或从 [发布页](https://github.com/keyanhan9-netizen/higgsfield-zh-cn/releases/latest) 下载 `higgsfield-zh-cn-v0.2.0.zip`。
 2. 解压文件。使用源码时，扩展目录是仓库中的 `extension/`；使用安装包时，选择解压后直接包含 `manifest.json` 的目录。
 3. 在 Chrome 地址栏打开 `chrome://extensions`。
 4. 由你自行开启右上角“开发者模式”。
@@ -53,13 +53,13 @@ npm run package
 `npm test` 运行基于原创合成 DOM 夹具的自动化测试，验证动态更新、中英文还原、重复执行和输入内容保护等行为。`npm run check` 执行项目静态检查。`npm run package` 生成：
 
 ```text
-dist/higgsfield-zh-cn-v0.1.0.zip
-dist/higgsfield-zh-cn-v0.1.0.zip.sha256
+dist/higgsfield-zh-cn-v0.2.0.zip
+dist/higgsfield-zh-cn-v0.2.0.zip.sha256
 ```
 
 安装包以 `manifest.json` 为根，包含 7 个扩展文件及 `LICENSE`，不需要把整个源码仓库加载进 Chrome。打包使用 Node.js 内置功能，无外部打包工具或第三方打包依赖；ZIP 采用存储模式（不压缩），固定条目顺序和时间戳，相同源文件生成相同安装包。旁边的 `.sha256` 文件记录安装包校验值。开发依赖下载属于本地开发环境的操作，扩展运行时不访问 npm 或其他服务。
 
-真实网站结构观察、夹具验证及实际浏览器安装是不同的验证步骤。本轮只读观察了首页和图像生成页，没有把扩展安装到用户浏览器，也没有进行全站注入实测。自动化测试的通过不能证明所有 Higgsfield 页面均被覆盖。
+真实网站结构观察、夹具验证及实际浏览器安装是不同的验证步骤。本轮只读检查多个页面的固定控件，并在 Chrome 中验证正式引擎与原创扩展页面夹具。本版尚未通过实际 Chrome 扩展加载和全站注入实测。自动化测试的通过不能证明所有 Higgsfield 页面均被覆盖，详情见 [验证记录](docs/validation.md)。
 
 ## 词典维护
 
@@ -71,6 +71,10 @@ dist/higgsfield-zh-cn-v0.1.0.zip.sha256
 | `selector` | 限定界面控件的 CSS 选择器 |
 | `ownText` | 可选；为 `true` 时只翻译目标元素的直接文本，不递归其子元素 |
 | `paths` | 可选的路由前缀数组，按路径边界匹配，进一步收窄适用页面 |
+| `linkedFrom` | 可选；只在已知触发控件 `aria-controls` 指向的 dialog/listbox/menu 中应用选择器 |
+| `scopeHeading` | 可选；还需匹配指定的固定菜单标题，防止将素材弹窗误认成设置菜单 |
+| `attributes` | 可选；例如仅允许 `['aria-label']`，不改写同按钮的文件名 tooltip |
+| `text` | 可选；为 `false` 时只处理允许的属性，保留直接文本 |
 | `entries` | 英文原文到简体中文的精确映射 |
 
 例如，以下是说明格式的合成示例：

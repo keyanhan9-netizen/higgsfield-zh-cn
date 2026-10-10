@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "Higgsfield 简体中文（非官方）",
-  "version": "0.1.0",
-  "description": "使用本地词典翻译 Higgsfield 的部分界面，支持中英文切换。非官方、无关联、无遥测。",
+  "version": "0.2.0",
+  "description": "本地词典汉化 Higgsfield 导航及已验证界面控件，支持中英文切换。非官方、无关联、无遥测。",
   "minimum_chrome_version": "102",
   "permissions": ["storage"],
   "action": {

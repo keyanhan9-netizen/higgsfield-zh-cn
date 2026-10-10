@@ -40,8 +40,12 @@ test("the production dictionary uses scoped selectors and explicit tool paths", 
     assert.equal(typeof rule.id, "string");
     assert.equal(ids.has(rule.id), false, `duplicate rule: ${rule.id}`);
     ids.add(rule.id);
-    for (const selector of rule.selector.split(",")) {
-      assert.match(selector.trim(), /^(header\s|footer\s|main\s+fieldset\s)/, rule.id);
+    if (rule.linkedFrom) {
+      assert.match(rule.linkedFrom, /^#(?:image-form|video-create-layout)\s/);
+      assert.ok(rule.paths?.length);
+      assert.equal(rule.ownText, true);
+    } else for (const selector of rule.selector.split(",")) {
+      assert.match(selector.trim(), /^(header\s|footer\s|main\s|#image-form\s|#video-create-layout\s|#audio-feed-view-controls-bar\s)/, rule.id);
     }
     assert.ok(Object.keys(rule.entries).length > 0);
     for (const [english, chinese] of Object.entries(rule.entries)) {
@@ -50,13 +54,14 @@ test("the production dictionary uses scoped selectors and explicit tool paths", 
       assert.equal(english, english.trim());
       assert.equal(chinese, chinese.trim());
     }
-    if (rule.selector.includes("main")) {
+    if (rule.id === "generation-controls") {
       assert.deepEqual(rule.paths, ["/ai/image", "/ai/video", "/generate"]);
       assert.equal(rule.ownText, true, "tool controls translate only the selected element's direct text");
       for (const selector of rule.selector.split(",")) {
         assert.match(selector.trim(), /\bbutton\.[^>]+>.+>.+/, "generation labels require the observed structure");
       }
     }
+    if (!['global-navigation', 'footer-links'].includes(rule.id)) assert.equal(rule.ownText, true);
   }
 });
 
